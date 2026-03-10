@@ -48,9 +48,24 @@ app.get('/:name', async (c) => {
         'Content-Type': 'image/svg+xml; charset=utf-8',
         'Cache-Control': 'no-cache',
         'ETag': key,
-        'Expires': 'Thu, 01 Jan 1970 00:00:00 GMT', // ChatGPT says.
+        'Expires': 'Thu, 01 Jan 1970 00:00:00 GMT',
         'Last-Modified': now.toUTCString(),
     })
+});
+
+app.get('/api/:name', async (c) => {
+  const name = c.req.param('name');
+  const add = c.req.query('add') !== '0';
+  const db = c.env.DB;
+
+  const counter = await getNum(db, name);
+  const num = counter.num + (add ? 1 : 0);
+
+  if (add) {
+    c.executionCtx.waitUntil(addNum(db, name));
+  }
+
+  return c.text(num.toString());
 });
 
 export default app
