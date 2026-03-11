@@ -2,6 +2,8 @@
 
 一个基于 Cloudflare Workers、D1 数据库和 KV 存储的极简风格计数器。支持 SVG 图片输出（类似经典的网络计数器）和纯文本 API，可自定义主题、数字长度等。
 
+ > 详细教程请看 [MoeCounter-Worker_D1 是如何使用的](https://personal-web.crimsonseraph.top/post/how-to-use-moe-counter/)
+
 ## 特性
 
 - 🖼️ 动态生成 SVG 图片，显示计数数字
